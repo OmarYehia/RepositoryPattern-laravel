@@ -5,7 +5,7 @@ namespace App\Repositories;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 
-class PostRepository
+class PostRepository implements PostRepositoryInterface
 {
     public function all()
     {

@@ -21,6 +21,6 @@ excluded from VerifyCsrfToken in Middlewares. After testing make sure to
 remove them from the $except parameter in the mentioned file
 */
 Route::get('/', [PostController::class, 'index']);
-Route::get('/customers/{customerID}', [PostController::class, 'show']);
-Route::patch('/customers/{customerID}', [PostController::class, 'update']);
-Route::delete('/customers/{customerID}', [PostController::class, 'destroy']);
+Route::get('/posts/{postID}', [PostController::class, 'show']);
+Route::patch('/posts/{postID}', [PostController::class, 'update']);
+Route::delete('/posts/{postID}', [PostController::class, 'destroy']);

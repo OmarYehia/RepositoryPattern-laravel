@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Repositories\PostRepository;
-use Illuminate\Http\Request;
+use App\Repositories\PostRepositoryInterface;
 
 class PostController extends Controller
 {
     private $postRepository;
 
-    public function __construct(PostRepository $postRepository)
+    public function __construct(PostRepositoryInterface $postRepository)
     {
         $this->postRepository = $postRepository;
     }
@@ -32,7 +31,7 @@ class PostController extends Controller
     {
         $this->postRepository->updateTitle($postID);
 
-        return redirect('/customers/' . $postID);
+        return redirect('/posts/' . $postID);
     }
 
     public function destroy($postID)
