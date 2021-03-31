@@ -2,19 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Post;
-use App\Http\Resources\PostResource;
+use App\Repositories\PostRepository;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    private $postRepository;
+
+    public function __construct(PostRepository $postRepository)
+    {
+        $this->postRepository = $postRepository;
+    }
+
     public function index()
     {
-        $posts = Post::orderBy('title')
-            ->with('user')
-            ->where('id', '>', '90')
-            ->get();
+        $posts = $this->postRepository->all();
+        
+        return $posts;
+    }
 
-        return PostResource::collection($posts);
+    public function show($postID)
+    {
+        $post = $this->postRepository->findById($postID);
+        
+        return $post;
+    }
+
+    public function update($postID)
+    {
+        $this->postRepository->updateTitle($postID);
+
+        return redirect('/customers/' . $postID);
+    }
+
+    public function destroy($postID)
+    {
+        $this->postRepository->deleteByID($postID);
+
+        return redirect('/');
     }
 }
